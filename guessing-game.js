@@ -24,27 +24,26 @@ let numAttempts = 0;
 askLimit();
 
 
-let checkGuess = (n) => {
-let num = Math.floor(n);
- if(num === secretNumber) {
-    console.log("You Win!");
-    return true;
- } else if(num > secretNumber) {
-    console.log("Too high.");
-    return false;
- } else if (num < secretNumber) {
-    console.log("Too low.");
-    return false;
-//  } else if( num !== Number) {
-//     return "Invalid input!";
-//  }
-}
+const checkGuess = num => {
+    if( num === secretNumber ) {
+        console.log('Correct');
+        return true;
+    }
+    if(num < secretNumber) console.log('Too Low');
+    if(num > secretNumber) console.log('Too high);
+                                       return false;
 }
 
 function askGuess() {
 rl.question('Enter a guess: ', (answer) =>{
 
-    console.log(checkGuess(Number(answer)));
+  let win = checkGuess( Number(answer));
+    if(win) {
+        console.log('You Win!');
+        rl.close(); 
+    } else {
+        askGuess()
+    }
     if(numAttempts === 0) {
         console.log("You Lose!");
         numAttempts += askLimit();
